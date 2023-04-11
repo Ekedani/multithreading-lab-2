@@ -11,11 +11,15 @@ public class StripeSync {
 
     public synchronized void waitForNextIteration(int iteration) {
         this.pausedThreads++;
-        while (pausedThreads < threads.length || iteration >= finishedIterations) {
+
+        while (pausedThreads < threads.length) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            if (iteration < finishedIterations) {
+                break;
             }
         }
         if (pausedThreads == threads.length) {
@@ -27,8 +31,11 @@ public class StripeSync {
     }
 
     private void updateThreads() {
+        final double[][] lastColumnGroup = threads[threads.length - 1].getBColumnGroup();
+        final int lastBColOffset = threads[threads.length - 1].getBOffset();
         for (StripeThread thread : threads) {
             thread.sendDataInCycle();
         }
+        threads[0].setBColumnData(lastColumnGroup, lastBColOffset);
     }
 }

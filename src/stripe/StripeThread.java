@@ -29,13 +29,21 @@ public class StripeThread extends Thread {
         this.nextThreadInCycle = nextThreadInCycle;
     }
 
-    public void setBColumnGroup(double[][] bColumnGroup, int bOffset) {
+    public double[][] getBColumnGroup() {
+        return bColumnGroup;
+    }
+
+    public int getBOffset() {
+        return bOffset;
+    }
+
+    public void setBColumnData(double[][] bColumnGroup, int bOffset) {
         this.bColumnGroup = bColumnGroup;
         this.bOffset = bOffset;
     }
 
     public void sendDataInCycle() {
-        this.nextThreadInCycle.setBColumnGroup(this.bColumnGroup, this.bOffset);
+        this.nextThreadInCycle.setBColumnData(this.bColumnGroup, this.bOffset);
     }
 
     @Override
@@ -48,9 +56,9 @@ public class StripeThread extends Thread {
 
     private void calculateSubtaskIteration() {
         for (int i = 0; i < aRowGroup.length; i++) {
-            for (int j = 0; j < bColumnGroup[0].length; j++) {
-                for (int k = 0; k < bColumnGroup.length; k++) {
-                    this.result.data[i + aOffset][j + bOffset] += aRowGroup[i][k] * bColumnGroup[k][j];
+            for (int j = 0; j < bColumnGroup.length; j++) {
+                for (int k = 0; k < bColumnGroup[0].length; k++) {
+                    this.result.data[i + aOffset][j + bOffset] += aRowGroup[i][k] * bColumnGroup[j][k];
                 }
             }
         }

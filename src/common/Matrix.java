@@ -35,7 +35,7 @@ public class Matrix {
         Random random = new Random();
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
-                data[i][j] = minVal + (maxVal - minVal) * random.nextDouble();
+                data[i][j] = Math.floor(minVal + (maxVal - minVal) * random.nextDouble());
             }
         }
     }
@@ -54,17 +54,11 @@ public class Matrix {
     public double[][] getRows(int offset, int numRows) {
         final double[][] result = new double[numRows][this.numCols];
         System.arraycopy(this.data, offset, result, 0, numRows);
-        for (int i = 0; i < result.length; i++) {
-            for (int j = 0; j < result[0].length; j++) {
-                System.out.print(result[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
         return result;
     }
 
-    public void print() {
+    public synchronized void print() {
+        System.out.println(Thread.currentThread().getName());
         for (double[] datum : this.data) {
             for (int j = 0; j < this.data[0].length; j++) {
                 System.out.print(datum[j] + " ");
