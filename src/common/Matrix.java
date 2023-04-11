@@ -54,6 +54,39 @@ public class Matrix {
     public double[][] getRows(int offset, int numRows) {
         final double[][] result = new double[numRows][this.numCols];
         System.arraycopy(this.data, offset, result, 0, numRows);
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[0].length; j++) {
+                System.out.print(result[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        return result;
+    }
+
+    public void print() {
+        for (double[] datum : this.data) {
+            for (int j = 0; j < this.data[0].length; j++) {
+                System.out.print(datum[j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public Matrix multiply(Matrix other) {
+        if (this.numCols != other.numRows) {
+            throw new IllegalArgumentException("Number of columns in first matrix must match number of rows in second matrix.");
+        }
+
+        Matrix result = new Matrix(this.numRows, other.numCols);
+        for (int i = 0; i < this.numRows; i++) {
+            for (int j = 0; j < other.numCols; j++) {
+                for (int k = 0; k < this.numCols; k++) {
+                    result.data[i][j] += this.data[i][k] * other.data[k][j];
+                }
+            }
+        }
         return result;
     }
 }
