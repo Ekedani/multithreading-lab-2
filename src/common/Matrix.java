@@ -21,20 +21,17 @@ public class Matrix {
         return this.numCols;
     }
 
-    protected void transpose() {
-        double[][] newData = new double[numCols][numRows];
+    public Matrix transpose() {
+        final Matrix transposed = new Matrix(numCols, numRows);
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
-                newData[j][i] = data[i][j];
+                transposed.data[j][i] = data[i][j];
             }
         }
-        int temp = numRows;
-        numRows = numCols;
-        numCols = temp;
-        data = newData;
+        return transposed;
     }
 
-    protected void generateRandomMatrix(double minVal, double maxVal) {
+    public void generateRandomMatrix(double minVal, double maxVal) {
         Random random = new Random();
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
@@ -43,7 +40,7 @@ public class Matrix {
         }
     }
 
-    protected void generateIdentityMatrix() {
+    public void generateIdentityMatrix() {
         if (numRows != numCols) {
             throw new IllegalArgumentException("Matrix must be square to generate identity matrix.");
         }
@@ -52,5 +49,11 @@ public class Matrix {
                 data[i][j] = i == j ? 1.0 : 0.0;
             }
         }
+    }
+
+    public double[][] getRows(int offset, int numRows) {
+        final double[][] result = new double[numRows][this.numCols];
+        System.arraycopy(this.data, offset, result, 0, numRows);
+        return result;
     }
 }
