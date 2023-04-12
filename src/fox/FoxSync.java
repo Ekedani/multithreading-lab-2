@@ -1,18 +1,21 @@
 package fox;
 
 public class FoxSync {
-    private final FoxThread[] threads;
+    private final double[][][][] aBlocks;
+    private final double[][][][] bBlocks;
+    private final FoxThread[][] threads;
     private int pausedThreads = 0;
     private int finishedIterations = 0;
 
-    public FoxSync(FoxThread[] threads) {
+    public FoxSync(double[][][][] aBlocks, double[][][][] bBlocks, FoxThread[][] threads) {
+        this.aBlocks = aBlocks;
+        this.bBlocks = bBlocks;
         this.threads = threads;
     }
 
     public synchronized void waitForNextIteration(int iteration) {
         this.pausedThreads++;
-
-        while (pausedThreads < threads.length) {
+        while (pausedThreads < threads.length * threads[0].length) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -22,15 +25,21 @@ public class FoxSync {
                 break;
             }
         }
-        if (pausedThreads == threads.length) {
-            updateThreads();
+        if (pausedThreads == threads.length * threads[0].length) {
+            updateThreads(iteration);
             pausedThreads = 0;
             finishedIterations++;
             notifyAll();
         }
     }
 
-    private void updateThreads() {
-        //TODO: Implement cycle sending
+    private void updateThreads(int iteration) {
+        int k = (iteration + 1) % threads.length;
+        for (int i = 0; i < threads.length; i++) {
+            for (int j = 0; j < threads[0].length; j++) {
+                threads[i][j].setABlock(aBlocks[i][k]);
+                threads[i][j].setBBlock(bBlocks[k][j]);
+            }
+        }
     }
 }

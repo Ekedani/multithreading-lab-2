@@ -1,26 +1,25 @@
 package fox;
 
 public class FoxThread extends Thread {
-    private final int resRow;
-    private final int resCol;
     private double[][] aBlock;
     private double[][] bBlock;
     private final double[][] result;
     private final int iterations;
+    private final FoxSync sync;
 
-    public FoxThread(int resRow, int resCol, double[][] aBlock, double[][] bBlock, int iterations) {
-        this.resRow = resRow;
-        this.resCol = resCol;
+    public FoxThread(double[][] aBlock, double[][] bBlock, int iterations, FoxSync sync) {
         this.aBlock = aBlock;
         this.bBlock = bBlock;
         this.result = new double[aBlock.length][aBlock.length];
         this.iterations = iterations;
+        this.sync = sync;
     }
 
     @Override
     public void run() {
         for (int i = 0; i < iterations; i++) {
             calculateSubtaskIteration();
+            sync.waitForNextIteration(i);
         }
     }
 
@@ -38,11 +37,15 @@ public class FoxThread extends Thread {
         return result;
     }
 
-    public int getResRow() {
-        return resRow;
+    public double[][] getBBlock() {
+        return bBlock;
     }
 
-    public int getResCol() {
-        return resCol;
+    public void setABlock(double[][] aBlock) {
+        this.aBlock = aBlock;
+    }
+
+    public void setBBlock(double[][] bBlock) {
+        this.bBlock = bBlock;
     }
 }

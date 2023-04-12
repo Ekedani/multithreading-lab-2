@@ -12,10 +12,7 @@ public class StripeThread extends Thread {
     private final Result result;
     private final StripeSync sync;
 
-    public StripeThread(double[][] aRowGroup, int aOffset, double[][] bColumnGroup, int bOffset,
-                        int iterations,
-                        Result result,
-                        StripeSync sync) {
+    public StripeThread(double[][] aRowGroup, int aOffset, double[][] bColumnGroup, int bOffset, int iterations, Result result, StripeSync sync) {
         this.aRowGroup = aRowGroup;
         this.aOffset = aOffset;
         this.bColumnGroup = bColumnGroup;
