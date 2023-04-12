@@ -3,9 +3,15 @@ package common;
 import java.util.Random;
 
 public class Matrix {
-    private int numRows;
-    private int numCols;
+    private final int numRows;
+    private final int numCols;
     public double[][] data;
+
+    public Matrix(int size) {
+        this.numRows = size;
+        this.numCols = size;
+        this.data = new double[numRows][numCols];
+    }
 
     public Matrix(int numRows, int numCols) {
         this.numRows = numRows;
@@ -57,17 +63,6 @@ public class Matrix {
         return result;
     }
 
-    public synchronized void print() {
-        System.out.println(Thread.currentThread().getName());
-        for (double[] datum : this.data) {
-            for (int j = 0; j < this.data[0].length; j++) {
-                System.out.print(datum[j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
     public Matrix multiply(Matrix other) {
         if (this.numCols != other.numRows) {
             throw new IllegalArgumentException("Number of columns in first matrix must match number of rows in second matrix.");
@@ -79,6 +74,41 @@ public class Matrix {
                 for (int k = 0; k < this.numCols; k++) {
                     result.data[i][j] += this.data[i][k] * other.data[k][j];
                 }
+            }
+        }
+        return result;
+    }
+
+    public synchronized void print() {
+        System.out.println(Thread.currentThread().getName());
+        for (double[] datum : this.data) {
+            for (int j = 0; j < this.data[0].length; j++) {
+                System.out.print(datum[j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public boolean equals(Matrix B) {
+        if (numRows != B.numRows || numCols != B.numCols) {
+            return false;
+        }
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                if (data[i][j] != B.data[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public double[][] getSquareBlock(int startRow, int startCol, int size) {
+        double[][] result = new double[size][size];
+        for (int i = 0; i < size && (i + startRow < numRows); i++) {
+            for (int j = 0; j < size && (j + startCol < numCols); j++) {
+                result[i][j] = this.data[i + startRow][j + startCol];
             }
         }
         return result;
