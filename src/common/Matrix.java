@@ -116,7 +116,8 @@ public class Matrix {
 
     public double[][][][] getFoxBlockSplit(int blocksNumSqrt) {
         double[][][][] matrixBlocks = new double[blocksNumSqrt][blocksNumSqrt][this.numRows][this.numCols];
-        final int blockSize = this.numRows / blocksNumSqrt;
+        final int blockSize = Math.ceilDiv(this.numRows, blocksNumSqrt);
+        System.out.println(this.numRows + " : " + blocksNumSqrt + " = "  + blockSize);
         for (int i = 0; i < blocksNumSqrt; i++) {
             for (int j = 0; j < blocksNumSqrt; j++) {
                 matrixBlocks[i][j] = getSquareBlock(i * blockSize, j * blockSize, blockSize);
