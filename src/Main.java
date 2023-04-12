@@ -5,12 +5,14 @@ import stripe.StripeMatrixMultiplicator;
 
 public class Main {
     public static void main(String[] args) {
-        final int matrixSize = 4;
+        final int matrixSize = 100;
         Matrix A = new Matrix(matrixSize);
         Matrix B = new Matrix(matrixSize);
         A.generateRandomMatrix(1, 50);
-        B.generateRandomMatrix(1, 4);
+        B.generateRandomMatrix(1, 50);
 
+        A.print();
+        B.print();
 
         StripeMatrixMultiplicator stripeMatrixMultiplicator = new StripeMatrixMultiplicator(2);
         FoxMatrixMultiplicator foxMatrixMultiplicator = new FoxMatrixMultiplicator(2);

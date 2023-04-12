@@ -37,15 +37,31 @@ public class FoxThread extends Thread {
         return result;
     }
 
-    public double[][] getBBlock() {
-        return bBlock;
-    }
-
     public void setABlock(double[][] aBlock) {
         this.aBlock = aBlock;
     }
 
     public void setBBlock(double[][] bBlock) {
         this.bBlock = bBlock;
+    }
+
+    public void printABlock() {
+        for (int i = 0; i < aBlock.length; i++) {
+            for (int j = 0; j < aBlock[0].length; j++) {
+                System.out.print(aBlock[i][j]);
+                System.out.print(' ');
+            }
+            System.out.println();
+        }
+    }
+
+    public void printBBlock() {
+        for (int i = 0; i < bBlock.length; i++) {
+            for (int j = 0; j < bBlock[0].length; j++) {
+                System.out.print(bBlock[i][j]);
+                System.out.print(' ');
+            }
+            System.out.println();
+        }
     }
 }
