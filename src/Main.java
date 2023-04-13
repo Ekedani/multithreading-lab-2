@@ -8,7 +8,7 @@ public class Main {
         final int defaultMatrixSize = 1000;
         final int defaultFoxBlocks = 2;
 
-        testIfParallelAlgorithmsAreCorrect(defaultMatrixSize);
+        testIfParallelAlgorithmsAreCorrect(defaultMatrixSize, defaultFoxBlocks);
 
         final int[] testMatrixSizesData = {500, 750, 1000, 1250, 1500, 2000};
         testMatrixSizes(testMatrixSizesData, defaultFoxBlocks);
@@ -17,18 +17,24 @@ public class Main {
         testThreadsNums(defaultMatrixSize, testThreadNumsData);
     }
 
-    static void testIfParallelAlgorithmsAreCorrect(int size) {
+    static void testIfParallelAlgorithmsAreCorrect(int size, int foxBlocks) {
         final Matrix A = new Matrix(size);
         final Matrix B = new Matrix(size);
+        A.generateRandomMatrix(1, 100);
+        B.generateRandomMatrix(1, 100);
+        A.saveToCSV("a");
+        B.saveToCSV("b");
 
-        StripeMatrixMultiplicator stripeMatrixMultiplicator = new StripeMatrixMultiplicator(4);
-        FoxMatrixMultiplicator foxMatrixMultiplicator = new FoxMatrixMultiplicator(2);
+        StripeMatrixMultiplicator stripeMatrixMultiplicator = new StripeMatrixMultiplicator(foxBlocks * foxBlocks);
+        FoxMatrixMultiplicator foxMatrixMultiplicator = new FoxMatrixMultiplicator(foxBlocks);
 
         // We consider the sequential algorithm to be always correct
         Matrix cNaive = A.multiply(B);
         Result cStripe = stripeMatrixMultiplicator.multiply(A, B);
+        cStripe.saveToCSV("cStripe");
         System.out.println("Stripe is correct: " + cNaive.equals(cStripe));
         Matrix cFox = foxMatrixMultiplicator.multiply(A, B);
+        cStripe.saveToCSV("cFox");
         System.out.println("Fox is correct: " + cNaive.equals(cFox));
     }
 

@@ -1,5 +1,7 @@
 package common;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 public class Matrix {
@@ -132,5 +134,18 @@ public class Matrix {
             }
         }
         return matrixBlocks;
+    }
+
+    public void saveToCSV(String fileName) {
+        try (FileWriter writer = new FileWriter(fileName + ".csv")) {
+            for (double[] row : this.data) {
+                for (double value : row) {
+                    writer.append(String.valueOf(value)).append(",");
+                }
+                writer.append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
