@@ -64,4 +64,15 @@ public class FoxThread extends Thread {
             System.out.println();
         }
     }
+
+    public void printResBlock() {
+        for (double[] doubles : result) {
+            for (int j = 0; j < result[0].length; j++) {
+                System.out.print(doubles[j]);
+                System.out.print(' ');
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }

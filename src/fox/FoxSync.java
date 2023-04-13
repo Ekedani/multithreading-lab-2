@@ -35,7 +35,7 @@ public class FoxSync {
 
     private void updateThreads(int iteration) {
         for (int i = 0; i < threads.length; i++) {
-            int k = (i + 1) % threads.length;
+            int k = (i + 1 + iteration) % threads.length;
             for (int j = 0; j < threads[0].length; j++) {
                 threads[i][j].setABlock(aBlocks[i][k]);
                 threads[i][j].setBBlock(bBlocks[k][j]);

@@ -14,6 +14,9 @@ public class StripeMatrixMultiplicator implements MatrixMultiplicator {
 
     @Override
     public Result multiply(Matrix A, Matrix B) {
+        if (A.getNumCols() != B.getNumRows()) {
+            throw new IllegalArgumentException("Number of columns in first matrix must match number of rows in second matrix.");
+        }
         this.result = new Result(A.getNumRows(), B.getNumCols());
         final StripeThread[] threads = this.createThreads(A, B);
         for (StripeThread thread : threads) {

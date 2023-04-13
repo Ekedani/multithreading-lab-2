@@ -14,6 +14,9 @@ public class FoxMatrixMultiplicator implements MatrixMultiplicator {
 
     @Override
     public Result multiply(Matrix A, Matrix B) {
+        if (A.getNumCols() != B.getNumRows()) {
+            throw new IllegalArgumentException("Number of columns in first matrix must match number of rows in second matrix.");
+        }
         FoxThread[][] threads = createThreads(A, B);
         for (FoxThread[] thread : threads) {
             for (int j = 0; j < threads[0].length; j++) {
@@ -41,7 +44,7 @@ public class FoxMatrixMultiplicator implements MatrixMultiplicator {
 
     private FoxThread[][] createThreads(Matrix A, Matrix B) {
         double[][][][] aBlocks = A.getFoxBlockSplit(blocksNumSqrt);
-        double[][][][] bBlocks = B.getFoxBlockSplit(blocksNumSqrt);
+        double[][][][] bBlocks = B.getFoxBlockSplit(blocksNumSqrt, aBlocks[0][0].length);
 
         FoxThread[][] threads = new FoxThread[blocksNumSqrt][blocksNumSqrt];
         FoxSync sync = new FoxSync(aBlocks, bBlocks, threads);

@@ -54,15 +54,4 @@ public class StripeThread extends Thread {
             }
         }
     }
-
-    public void printBData() {
-        System.out.println("B offset: " + bOffset);
-        for (int i = 0; i < bColumnGroup.length; i++) {
-            for (int j = 0; j < bColumnGroup[0].length; j++) {
-                System.out.print(bColumnGroup[i][j]);
-                System.out.print(' ');
-            }
-            System.out.println();
-        }
-    }
 }

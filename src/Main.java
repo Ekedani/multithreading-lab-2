@@ -5,24 +5,21 @@ import stripe.StripeMatrixMultiplicator;
 
 public class Main {
     public static void main(String[] args) {
-        final int matrixSize = 4;
-        Matrix A = new Matrix(matrixSize);
-        Matrix B = new Matrix(matrixSize);
+        final int matrixSize = 100;
+        Matrix A = new Matrix(200, matrixSize);
+        Matrix B = new Matrix(matrixSize, 200);
         A.generateRandomMatrix(1, 50);
         B.generateRandomMatrix(1, 50);
 
-        B.print();
+        StripeMatrixMultiplicator stripeMatrixMultiplicator = new StripeMatrixMultiplicator(1);
+        FoxMatrixMultiplicator foxMatrixMultiplicator = new FoxMatrixMultiplicator(5);
 
-        StripeMatrixMultiplicator stripeMatrixMultiplicator = new StripeMatrixMultiplicator(3);
-        FoxMatrixMultiplicator foxMatrixMultiplicator = new FoxMatrixMultiplicator(2);
-
-        // Matrix cFox = foxMatrixMultiplicator.multiply(A, B);
-        // System.out.println("Fox is correct: " + cNaive.equals(cFox));
         Matrix cNaive = A.multiply(B);
-        cNaive.print();
+
         Result cStripe = stripeMatrixMultiplicator.multiply(A, B);
-        cStripe.print();
         System.out.println("Stripe is correct: " + cNaive.equals(cStripe));
 
+        Matrix cFox = foxMatrixMultiplicator.multiply(A, B);
+        System.out.println("Fox is correct: " + cNaive.equals(cFox));
     }
 }
