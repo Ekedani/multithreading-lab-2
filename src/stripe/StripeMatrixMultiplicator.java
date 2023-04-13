@@ -48,7 +48,7 @@ public class StripeMatrixMultiplicator implements MatrixMultiplicator {
             double[][] aRowGroup = A.getRows(i * rowGroupSize, currentRowSize);
             double[][] bColGroup = transposedB.getRows(i * colGroupSize, currentColSize);
 
-            StripeThread stripeThread = new StripeThread(aRowGroup, i * rowGroupSize, bColGroup,  i * colGroupSize,
+            StripeThread stripeThread = new StripeThread(aRowGroup, i * rowGroupSize, bColGroup, i * colGroupSize,
                     groupsNum, this.result, sync);
             threads[i] = stripeThread;
         }

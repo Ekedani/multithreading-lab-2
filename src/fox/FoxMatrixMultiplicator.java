@@ -6,7 +6,6 @@ import common.Result;
 
 public class FoxMatrixMultiplicator implements MatrixMultiplicator {
     private final int blocksNumSqrt;
-    private Result result = null;
 
     public FoxMatrixMultiplicator(int blocksNum) {
         this.blocksNumSqrt = blocksNum;
@@ -38,8 +37,7 @@ public class FoxMatrixMultiplicator implements MatrixMultiplicator {
                 resultBlocks[i][j] = threads[i][j].getResult();
             }
         }
-        this.result = Result.joinFoxBlockSplit(A.getNumRows(), B.getNumCols(), resultBlocks);
-        return result;
+        return Result.joinFoxBlockSplit(A.getNumRows(), B.getNumCols(), resultBlocks);
     }
 
     private FoxThread[][] createThreads(Matrix A, Matrix B) {
