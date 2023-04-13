@@ -7,7 +7,6 @@ public class StripeThread extends Thread {
     private final int aOffset;
     private double[][] bColumnGroup;
     private int bOffset;
-    private StripeThread nextThreadInCycle;
     private final int iterations;
     private final Result result;
     private final StripeSync sync;
@@ -22,10 +21,6 @@ public class StripeThread extends Thread {
         this.sync = sync;
     }
 
-    public void setNextThreadInCycle(StripeThread nextThreadInCycle) {
-        this.nextThreadInCycle = nextThreadInCycle;
-    }
-
     public double[][] getBColumnGroup() {
         return bColumnGroup;
     }
@@ -34,13 +29,12 @@ public class StripeThread extends Thread {
         return bOffset;
     }
 
-    public void setBColumnData(double[][] bColumnGroup, int bOffset) {
+    public void setBColumnGroup(double[][] bColumnGroup) {
         this.bColumnGroup = bColumnGroup;
-        this.bOffset = bOffset;
     }
 
-    public void sendDataInCycle() {
-        this.nextThreadInCycle.setBColumnData(this.bColumnGroup, this.bOffset);
+    public void setBOffset(int bOffset) {
+        this.bOffset = bOffset;
     }
 
     @Override
@@ -58,6 +52,17 @@ public class StripeThread extends Thread {
                     this.result.data[i + aOffset][j + bOffset] += aRowGroup[i][k] * bColumnGroup[j][k];
                 }
             }
+        }
+    }
+
+    public void printBData() {
+        System.out.println("B offset: " + bOffset);
+        for (int i = 0; i < bColumnGroup.length; i++) {
+            for (int j = 0; j < bColumnGroup[0].length; j++) {
+                System.out.print(bColumnGroup[i][j]);
+                System.out.print(' ');
+            }
+            System.out.println();
         }
     }
 }

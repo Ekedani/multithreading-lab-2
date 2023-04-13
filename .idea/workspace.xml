@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45e62684-dacc-4fa3-92a3-f3a916eb83e7" name="Changes" comment="Finished StripeMatrixMultiplicator">
-      <change afterPath="$PROJECT_DIR$/src/fox/FoxSync.java" afterDir="false" />
+    <list default="true" id="45e62684-dacc-4fa3-92a3-f3a916eb83e7" name="Changes" comment="Fixed Fox another time">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Matrix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fox/FoxMatrixMultiplicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fox/FoxMatrixMultiplicator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fox/FoxThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fox/FoxThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fox/FoxSync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fox/FoxSync.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stripe/StripeMatrixMultiplicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stripe/StripeMatrixMultiplicator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stripe/StripeSync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stripe/StripeSync.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stripe/StripeThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stripe/StripeThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +75,8 @@
       <workItem from="1681142966771" duration="6779000" />
       <workItem from="1681212267557" duration="5965000" />
       <workItem from="1681221172482" duration="16486000" />
-      <workItem from="1681306423791" duration="2994000" />
+      <workItem from="1681306423791" duration="18475000" />
+      <workItem from="1681384254026" duration="1653000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1681121913044</created>
@@ -119,11 +120,50 @@
       <option name="project" value="LOCAL" />
       <updated>1681238635232</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Started implementing FoxThread">
+      <created>1681310702660</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681310702660</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Finished Fox, needs to be debugged">
+      <created>1681318256408</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1681318256408</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Fixed fix">
+      <created>1681319618705</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1681319618705</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Fixed Fox another time">
+      <created>1681322112748</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681322112748</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
@@ -132,6 +172,10 @@
     <MESSAGE value="Implemented StripeMatrixMultiplicator, I guess" />
     <MESSAGE value="Added naive multiplication" />
     <MESSAGE value="Finished StripeMatrixMultiplicator" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished StripeMatrixMultiplicator" />
+    <MESSAGE value="Started implementing FoxThread" />
+    <MESSAGE value="Finished Fox, needs to be debugged" />
+    <MESSAGE value="Fixed fix" />
+    <MESSAGE value="Fixed Fox another time" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Fox another time" />
   </component>
 </project>

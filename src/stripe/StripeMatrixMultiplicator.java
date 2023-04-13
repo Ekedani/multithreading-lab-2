@@ -49,9 +49,6 @@ public class StripeMatrixMultiplicator implements MatrixMultiplicator {
                     groupsNum, this.result, sync);
             threads[i] = stripeThread;
         }
-        for (int i = 0; i < threads.length; i++) {
-            threads[i].setNextThreadInCycle(threads[(i + 1) % threads.length]);
-        }
         return threads;
     }
 }

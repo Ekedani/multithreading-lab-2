@@ -32,10 +32,14 @@ public class StripeSync {
 
     private void updateThreads() {
         final double[][] lastColumnGroup = threads[threads.length - 1].getBColumnGroup();
-        final int lastBColOffset = threads[threads.length - 1].getBOffset();
-        for (StripeThread thread : threads) {
-            thread.sendDataInCycle();
+        final int lastOffset = threads[threads.length - 1].getBOffset();
+        for (int i = threads.length - 2; i >= 0; i--) {
+            double[][] previousColumnGroup = threads[i].getBColumnGroup();
+            int previousOffset = threads[i].getBOffset();
+            threads[i + 1].setBColumnGroup(previousColumnGroup);
+            threads[i + 1].setBOffset(previousOffset);
         }
-        threads[0].setBColumnData(lastColumnGroup, lastBColOffset);
+        threads[0].setBColumnGroup(lastColumnGroup);
+        threads[0].setBOffset(lastOffset);
     }
 }

@@ -80,7 +80,6 @@ public class Matrix {
     }
 
     public synchronized void print() {
-        System.out.println(Thread.currentThread().getName());
         for (double[] datum : this.data) {
             for (int j = 0; j < this.data[0].length; j++) {
                 System.out.print(datum[j] + " ");
@@ -117,7 +116,7 @@ public class Matrix {
     public double[][][][] getFoxBlockSplit(int blocksNumSqrt) {
         double[][][][] matrixBlocks = new double[blocksNumSqrt][blocksNumSqrt][this.numRows][this.numCols];
         final int blockSize = Math.ceilDiv(this.numRows, blocksNumSqrt);
-        System.out.println(this.numRows + " : " + blocksNumSqrt + " = "  + blockSize);
+        System.out.println(this.numRows + " : " + blocksNumSqrt + " = " + blockSize);
         for (int i = 0; i < blocksNumSqrt; i++) {
             for (int j = 0; j < blocksNumSqrt; j++) {
                 matrixBlocks[i][j] = getSquareBlock(i * blockSize, j * blockSize, blockSize);
