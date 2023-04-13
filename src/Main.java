@@ -3,22 +3,18 @@ import common.Result;
 import fox.FoxMatrixMultiplicator;
 import stripe.StripeMatrixMultiplicator;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import static java.util.Arrays.binarySearch;
-import static java.util.Arrays.sort;
-
 public class Main {
     public static void main(String[] args) {
         final int defaultMatrixSize = 1000;
         final int defaultFoxBlocks = 2;
 
-        final int[] testMatrixSizesData = {500, 750, 1000, 1250, 1500, 2000};
-        //testMatrixSizes(testMatrixSizesData, defaultFoxBlocks);
+        testIfParallelAlgorithmsAreCorrect(defaultMatrixSize);
 
-        final int[] testStripeThreadNums = {2, 4, 6, 8, 9, 12, 15, 16, 25};
-        testThreadsNums(defaultMatrixSize, testStripeThreadNums);
+        final int[] testMatrixSizesData = {500, 750, 1000, 1250, 1500, 2000};
+        testMatrixSizes(testMatrixSizesData, defaultFoxBlocks);
+
+        final int[] testThreadNumsData = {2, 4, 6, 8, 9, 12, 15, 16, 25};
+        testThreadsNums(defaultMatrixSize, testThreadNumsData);
     }
 
     static void testIfParallelAlgorithmsAreCorrect(int size) {
@@ -97,7 +93,7 @@ public class Main {
             stripeMetrics[i] = finish - start;
 
             int x = (int) Math.sqrt(threadsNums[i]);
-            if (Math.pow(x,2) == threadsNums[i]) {
+            if (Math.pow(x, 2) == threadsNums[i]) {
                 FoxMatrixMultiplicator foxMatrixMultiplicator = new FoxMatrixMultiplicator((int) Math.sqrt(threadsNums[i]));
                 start = System.nanoTime();
                 foxMatrixMultiplicator.multiply(A, B);
